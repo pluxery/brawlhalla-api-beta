@@ -4,7 +4,7 @@ namespace App\Http\Filters;
 
 use Illuminate\Database\Eloquent\Builder;
 
-abstract class AbstractIFilter implements IFilter
+abstract class AbstractFilter implements IFilter
 {
 
     private $queryParams = [];

@@ -15,9 +15,14 @@ class CreateReportsTable extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('snitch');
-            $table->foreign('snitch', 'report_post_fk')->on('posts')->references('id');
-            $table->index('snitch', 'report_post_idx');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id', 'report_user_fk')->on('users')->references('id');
+            $table->index('user_id', 'report_user_idx');
+
+
+            $table->unsignedBigInteger('post_id');
+            $table->foreign('post_id', 'report_post_fk')->on('posts')->references('id');
+            $table->index('post_id', 'report_post_idx');
 
             $table->text('text');
             $table->timestamps();

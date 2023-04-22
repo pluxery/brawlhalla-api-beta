@@ -2,28 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Filters\Post\Filter;
 use App\Http\Requests\Post\FilterRequest;
+use App\Http\Requests\Post\StoreRequest;
+use App\Http\Requests\Post\UpdateRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
-use Illuminate\Http\Request;
+use App\Services\PostService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-
+//todo make policy
 class PostController extends Controller
 {
-//todo make resourse controller/ make service/ make policy/ other conrtollers
+    public $service;
+
+    function __construct(PostService $service)
+    {
+        $this->service = $service;
+    }
+
     function index(FilterRequest $request): AnonymousResourceCollection
     {
         $data = $request->validated();
-        $filter = app()->make(Filter::class, ['queryParams' => array_filter($data)]);
-        $posts = Post::filter($filter)->paginate(10);
+        $posts = $this->service->index($data);
         return PostResource::collection($posts);
 
     }
 
-    function store()
+    function store(StoreRequest $request): PostResource
     {
-
+        $data = $request->validated();
+        $post = $this->service->store($data);
+        return new PostResource($post);
     }
 
     function edit(Post $post)
@@ -31,14 +39,17 @@ class PostController extends Controller
 
     }
 
-    function update(Post $post)
+    function update(UpdateRequest $request, Post $post)
     {
+        $data = $request->validated();
+        $this->service->update($post, $data);
+        return new PostResource($post);
 
     }
 
     function destroy(Post $post)
     {
-
+        return $post->delete();
     }
 
 }

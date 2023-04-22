@@ -20,7 +20,7 @@ class PostFactory extends Factory
             'content' => $this->faker->text,
             'likes' => random_int(0, 100),
             'category_id' => Category::get()->random()->id,
-            'author' => User::get()->random()->id,
+            'user_id' => User::get()->random()->id,
 
         ];
     }

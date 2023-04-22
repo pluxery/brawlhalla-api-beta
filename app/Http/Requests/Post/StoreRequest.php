@@ -13,7 +13,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,10 +25,9 @@ class StoreRequest extends FormRequest
     {
         return [
             'title' => 'required|string',
-            'author' => 'required',
+            'user_id' => 'required|integer',
             'content' => 'required|string',
             'category' => '',
-
             'tags' => 'array',
             'tags.*.title' => 'required|string'
         ];

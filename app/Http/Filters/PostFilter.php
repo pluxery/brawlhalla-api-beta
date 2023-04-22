@@ -1,14 +1,12 @@
 <?php
 
 
-namespace App\Http\Filters\Post;
+namespace App\Http\Filters;
 
-use App\Http\Filters\AbstractIFilter;
-use App\Models\Category;
-use App\Models\Post;
+
 use Illuminate\Database\Eloquent\Builder;
 
-class Filter extends AbstractIFilter
+class PostFilter extends AbstractFilter
 {
 
     protected function getCallbacks(): array
@@ -40,7 +38,7 @@ class Filter extends AbstractIFilter
 
     public function author(Builder $queryBuilder, $value): Builder
     {
-        return $queryBuilder->where('author', '=', "{$value}");
+        return $queryBuilder->where('user_id', '=', "{$value}");
     }
 
     //create filter by date
