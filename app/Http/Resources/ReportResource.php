@@ -17,7 +17,8 @@ class ReportResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'snitch' => new UserResource($this->snitch),
+            'user' => new UserResource($this->user),
+            'post' =>  new PostResource($this->post),
             'text' => $this->text,
             'created_at' => $this->created_at,
         ];

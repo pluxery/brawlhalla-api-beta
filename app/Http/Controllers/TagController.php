@@ -21,17 +21,10 @@ class TagController extends Controller
         return new TagResource($tag);
     }
 
-    function create()
-    {
-    }
 
     function show(Tag $tag)
     {
         return new TagResource($tag);
-    }
-
-    function edit(Tag $tag)
-    {
     }
 
 
