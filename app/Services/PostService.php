@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\DB;
 
 class PostService
 {
-
     public function index($data)
     {
         $filter = app()->make(PostFilter::class, ['queryParams' => array_filter($data)]);
@@ -23,19 +22,14 @@ class PostService
         //todo testing
         try {
             DB::beginTransaction();
-            $categoryId = $this->getCategoryId($data['category']);
-            $tagIds = $this->getTagIdArray($data['tags']);
 
             $post = Post::create([
                 'title' => $data['title'],
                 'user_id' => $data['user_id'],
                 'content' => $data['content'],
-                'category_id' => $categoryId,
             ]);
-
-            $post->tags->attach($tagIds);
+            $post->category = $this->getCategory($data['category']);
             DB::commit();
-
 
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -49,46 +43,50 @@ class PostService
         //todo testing
         try {
             DB::beginTransaction();
-            $categoryId = $this->getCategoryId($data['category']);
-            $tagIds = $this->getTagIdArray($data['tags']);
 
             $post->update([
                 'title' => $data['title'],
-                'user_id' => $data['user_id'],
                 'content' => $data['content'],
-                'category_id' => $categoryId,
-            ])->fresh();
-
-            $post->tags->attach($tagIds);
+                'likes' => $data['likes'],
+            ]);
+            $post->category = $this->getCategory($data['category']);
+            //todo fix tags
+//            $post->tags->sync($this->getTags($data['tags']));
             DB::commit();
-
 
         } catch (\Exception $exception) {
             DB::rollBack();
             return $exception->getMessage();
         }
         return $post;
-
     }
 
 
-    private function getCategoryId($category)
+    private function getCategory($category)
     {
-        return isset($category['id']) ?
-            Category::find($category['id'])->update(['name' => $category['name']])->fresh()->id :
-            Category::create(['name' => $category['name']])->id;
+        if (isset($category['id'])) {
+            $model = Category::find($category['id']);
+            $model->update(['name' => $category['name']]);
+            return $model;
+        } else {
+            return Category::create(['name' => $category['name']]);
+        }
     }
 
-    private function getTagIdArray($tags)
+    private function getTags($tags)
     {
         $result = [];
         foreach ($tags as $tag) {
-            $id = isset($tag['id']) ? Tag::find($tag['id'])->update(['name' => $tag['name']])->fresh()->id :
-                Tag::create(['name' => $tag['name']])->id;
-            $result[] = $id;
+            if (isset($tag['id'])) {
+                $model = Tag::find($tag['id']);
+                $model->update(['name' => $tag['name']]);
+                $result[] = $model;
+            } else {
+                $result[] = Tag::create(['name' => $tag['name']]);
+            }
         }
         return $result;
-    }
 
+    }
 }
 

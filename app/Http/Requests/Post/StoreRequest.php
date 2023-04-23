@@ -29,7 +29,7 @@ class StoreRequest extends FormRequest
             'content' => 'required|string',
             'category' => '',
             'tags' => 'array',
-            'tags.*.title' => 'required|string'
+            'tags.*.name' => 'required|string'
         ];
     }
 }

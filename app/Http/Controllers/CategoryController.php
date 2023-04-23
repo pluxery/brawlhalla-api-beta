@@ -21,19 +21,11 @@ class CategoryController extends Controller
         return new CategoryResource($category);
     }
 
-    function create()
-    {
-    }
 
     function show(Category $category)
     {
         return new CategoryResource($category);
     }
-
-    function edit(Category $category)
-    {
-    }
-
 
     function update(Category $category)
     {
