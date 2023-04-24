@@ -42,6 +42,7 @@ class PostController extends Controller
 
     function update(UpdateRequest $request, Post $post)
     {
+
         $data = $request->validated();
         $this->service->update($data, $post);
         return new PostResource($post);

@@ -19,7 +19,6 @@ class PostService
 
     function store($data)
     {
-        //todo testing
         try {
             DB::beginTransaction();
 
@@ -29,6 +28,7 @@ class PostService
                 'content' => $data['content'],
             ]);
             $post->category = $this->getCategory($data['category']);
+            $post->tags()->attach($this->getTagIds($data['tags']));
             DB::commit();
 
         } catch (\Exception $exception) {
@@ -40,18 +40,15 @@ class PostService
 
     function update($data, $post)
     {
-        //todo testing
         try {
             DB::beginTransaction();
 
             $post->update([
                 'title' => $data['title'],
                 'content' => $data['content'],
-                'likes' => $data['likes'],
             ]);
             $post->category = $this->getCategory($data['category']);
-            //todo fix tags
-//            $post->tags->sync($this->getTags($data['tags']));
+            $post->tags()->sync($this->getTagIds($data['tags']));
             DB::commit();
 
         } catch (\Exception $exception) {
@@ -73,20 +70,20 @@ class PostService
         }
     }
 
-    private function getTags($tags)
+    private function getTagIds($tags)
     {
         $result = [];
         foreach ($tags as $tag) {
             if (isset($tag['id'])) {
                 $model = Tag::find($tag['id']);
                 $model->update(['name' => $tag['name']]);
-                $result[] = $model;
+                $result[] = $model->id;
             } else {
-                $result[] = Tag::create(['name' => $tag['name']]);
+                $model=Tag::create(['name' => $tag['name']]);
+                $result[] = $model->id;
             }
         }
         return $result;
-
     }
 }
 

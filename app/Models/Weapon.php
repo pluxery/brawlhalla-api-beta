@@ -5,8 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PostTag extends Model
+class Weapon extends Model
 {
     use HasFactory;
-    protected $guarded = false;
+     protected $guarded = false;
+
+     function legends(){
+         //TODO impementation
+     }
 }

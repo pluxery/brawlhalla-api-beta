@@ -16,6 +16,7 @@ class PostResource extends JsonResource
      */
     public function toArray($request)
     {
+        //todo: for collection hide comments...
         return [
             'id' => $this->id,
             'title' => $this->title,
