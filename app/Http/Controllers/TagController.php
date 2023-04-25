@@ -9,8 +9,7 @@ class TagController extends Controller
 {
     function index()
     {
-        $tags = Tag::all();
-        return TagResource::collection($tags);
+        return TagResource::collection(Tag::all());
     }
 
     function store()

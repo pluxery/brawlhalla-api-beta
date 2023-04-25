@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Legend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreLegendRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class StoreLegendRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,12 @@ class StoreLegendRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|string',
+            'image' => 'string',
+            'history' => 'string',
+            'first_weapon_id' => 'integer',//define struct
+            'second_weapon_id' => 'integer', //define struct
+            'stats_id' => 'integer',//define struct
         ];
     }
 }

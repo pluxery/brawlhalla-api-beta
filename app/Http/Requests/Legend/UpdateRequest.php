@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Stat;
+namespace App\Http\Requests\Legend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreStatRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,13 @@ class StoreStatRequest extends FormRequest
     public function rules()
     {
         return [
-            'attack' => 'required|integer',
-            'dexterity' => 'required|integer',
-            'defend' => 'required|integer',
-            'speed' => 'required|integer',
+            'id' => 'required|integer',
+            'name' => 'string',
+            'image' => 'string',
+            'history' => 'string',
+            'first_weapon_id' => 'integer',//define struct
+            'second_weapon_id' => 'integer', //define struct
+            'stats_id' => 'integer',//define struct
         ];
     }
 }

@@ -13,7 +13,7 @@ class UpdateStatRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,14 @@ class UpdateStatRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        return
+            [
+                'id'=>'required|integer',
+                'attack' => 'integer',
+                'dexterity' => 'integer',
+                'defend' => 'integer',
+                'speed' => 'integer',
+            ];
+
     }
 }
