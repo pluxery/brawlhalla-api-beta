@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Http\Filters\PostFilter;
-use App\Http\Requests\Post\UpdateRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
@@ -21,13 +20,14 @@ class PostService
     {
         try {
             DB::beginTransaction();
-
+            $categoryId = Category::firstOrCreate(['name' => $data['category']['name']])->id;
             $post = Post::create([
                 'title' => $data['title'],
                 'user_id' => $data['user_id'],
                 'content' => $data['content'],
+                'category_id' => $categoryId,
+
             ]);
-            $post->category = $this->getCategory($data['category']);
             $post->tags()->attach($this->getTagIds($data['tags']));
             DB::commit();
 
@@ -42,12 +42,12 @@ class PostService
     {
         try {
             DB::beginTransaction();
-
+            $categoryId = Category::firstOrCreate(['name' => $data['category']['name']])->id;
             $post->update([
                 'title' => $data['title'],
                 'content' => $data['content'],
+                'category_id' => $categoryId
             ]);
-            $post->category = $this->getCategory($data['category']);
             $post->tags()->sync($this->getTagIds($data['tags']));
             DB::commit();
 
@@ -58,30 +58,12 @@ class PostService
         return $post;
     }
 
-
-    private function getCategory($category)
-    {
-        if (isset($category['id'])) {
-            $model = Category::find($category['id']);
-            $model->update(['name' => $category['name']]);
-            return $model;
-        } else {
-            return Category::create(['name' => $category['name']]);
-        }
-    }
-
-    private function getTagIds($tags)
+    private function getTagIds($tags): array
     {
         $result = [];
         foreach ($tags as $tag) {
-            if (isset($tag['id'])) {
-                $model = Tag::find($tag['id']);
-                $model->update(['name' => $tag['name']]);
-                $result[] = $model->id;
-            } else {
-                $model=Tag::create(['name' => $tag['name']]);
-                $result[] = $model->id;
-            }
+            $model = Tag::firstOrCreate(['name' => $tag['name']]);
+            $result[] = $model->id;
         }
         return $result;
     }

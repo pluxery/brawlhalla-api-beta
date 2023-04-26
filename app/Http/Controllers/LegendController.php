@@ -21,17 +21,17 @@ class LegendController extends Controller
 
     public function index(FilterRequest $request)
     {
-        //todo FILTER
         $data = $request->validated();
         $legends = $this->service->index($data);
         return LegendResource::collection($legends);
     }
 
 
-
     public function store(StoreRequest $request)
     {
-        //
+        $data = $request->validated();
+        $legend = $this->service->store($data);
+        return new LegendResource($legend);
     }
 
 
