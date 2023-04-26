@@ -2,83 +2,53 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Legend\FilterRequest;
 use App\Http\Requests\Legend\StoreRequest;
 use App\Http\Requests\Legend\UpdateRequest;
 use App\Http\Resources\LegendResource;
 use App\Models\Legend;
+use App\Services\LegendService;
 
 class LegendController extends Controller
 {
 
-    public function index()
+    public $service;
+
+    function __construct(LegendService $service)
+    {
+        $this->service = $service;
+    }
+
+    public function index(FilterRequest $request)
     {
         //todo FILTER
-        return LegendResource::collection(Legend::all());
+        $data = $request->validated();
+        $legends = $this->service->index($data);
+        return LegendResource::collection($legends);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\Legend\StoreRequest  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(StoreRequest $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Legend  $legend
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Legend $legend)
     {
-        //
+        return new LegendResource($legend);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Legend  $legend
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Legend $legend)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\Legend\UpdateRequest  $request
-     * @param  \App\Models\Legend  $legend
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateRequest $request, Legend $legend)
     {
-        //
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Legend  $legend
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Legend $legend)
     {
-        //
+        return $legend->delete();
     }
 }
