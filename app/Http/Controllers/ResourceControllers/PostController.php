@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ResourceControllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\Post\FilterRequest;
 use App\Http\Requests\Post\StoreRequest;
 use App\Http\Requests\Post\UpdateRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use App\Services\PostService;
-
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+
 //todo make policy
 class PostController extends Controller
 {
@@ -23,7 +22,7 @@ class PostController extends Controller
 
     function index(FilterRequest $request): AnonymousResourceCollection
     {
-        dd(auth()->user());
+
         $data = $request->validated();
         $posts = $this->service->index($data);
         return PostResource::collection($posts);

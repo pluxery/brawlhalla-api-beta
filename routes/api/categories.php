@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ResourceControllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(CategoryController::class)->group(function () {

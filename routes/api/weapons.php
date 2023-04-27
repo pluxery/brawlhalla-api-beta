@@ -1,7 +1,7 @@
 <?php
 
 
-use App\Http\Controllers\WeaponController;
+use App\Http\Controllers\ResourceControllers\WeaponController;
 use Illuminate\Support\Facades\Route;
 
 

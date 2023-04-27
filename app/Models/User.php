@@ -37,6 +37,11 @@ class User extends Authenticatable
 
     function posts(): HasMany
     {
-        return $this->hasMany(Post::class, 'author', 'id');
+        return $this->hasMany(Post::class, 'user_id', 'id');
+    }
+
+    function favoriteLegends(): HasMany
+    {
+        return $this->hasMany(UserFavoriteLegend::class, 'user_id', 'id');
     }
 }

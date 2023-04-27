@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Http\Filters\LegendFilter;
-use App\Http\Resources\WeaponResource;
 use App\Models\Legend;
 use App\Models\Stat;
 use App\Models\Weapon;
@@ -46,7 +45,7 @@ class LegendService
     }
 
     function update($data, Legend $legend)
-    { //todo make update legend, and more validation for requests
+    {
         try {
 
             DB::beginTransaction();

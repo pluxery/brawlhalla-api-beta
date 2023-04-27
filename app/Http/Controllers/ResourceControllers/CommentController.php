@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ResourceControllers;
 
 use App\Http\Requests\Comment\StoreRequest;
 use App\Http\Resources\CommentResource;
 use App\Models\Comment;
-use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {

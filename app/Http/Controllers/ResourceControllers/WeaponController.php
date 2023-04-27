@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ResourceControllers;
 
 use App\Http\Resources\WeaponResource;
 use App\Models\Weapon;

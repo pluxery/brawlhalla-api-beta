@@ -18,7 +18,9 @@ class LegendResource extends JsonResource
                 new WeaponResource($this->first_weapon),
                 new WeaponResource($this->second_weapon)
             ],
-            'history' => $this->history
+            'history' => $this->history,
+            'rating' => $this->rating
+
         ];
     }
 }

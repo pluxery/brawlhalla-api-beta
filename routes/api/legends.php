@@ -1,7 +1,8 @@
 <?php
 
 
-use App\Http\Controllers\LegendController;
+use App\Http\Controllers\ResourceControllers\LegendController;
+use App\Http\Controllers\UserSetRatingLegendController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -11,4 +12,6 @@ Route::controller(LegendController::class)->group(function () {
     Route::patch('/legends/{legend}', 'update')->name('legends.update');
     Route::post('/legends', 'store')->name('legends.store');
     Route::delete('/legends/{legend}', 'destroy')->name('legends.delete');
+
+    Route::post("/legends/{legend}/update_rating", UserSetRatingLegendController::class);
 });

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Actions\Fortify\GetLoginUser;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ResourceControllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 

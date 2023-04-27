@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ResourceControllers;
 
 use App\Http\Requests\Legend\FilterRequest;
 use App\Http\Requests\Legend\StoreRequest;
@@ -8,7 +8,6 @@ use App\Http\Requests\Legend\UpdateRequest;
 use App\Http\Resources\LegendResource;
 use App\Models\Legend;
 use App\Services\LegendService;
-use function PHPUnit\Framework\returnArgument;
 
 class LegendController extends Controller
 {

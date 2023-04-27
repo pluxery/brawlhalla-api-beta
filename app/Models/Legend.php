@@ -29,4 +29,11 @@ class Legend extends Model
     {
         return $this->belongsTo(Weapon::class, 'second_weapon_id', 'id');
     }
+
+    function updateRating(): void
+    {
+        $table = $this->hasMany(RatingLegend::class);
+        $this->rating = $table->sum('rating') / $table->count();
+        $this->setAttribute("rating", $table->sum('rating') / $table->count());
+    }
 }

@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ResourceControllers;
 
 use App\Http\Requests\Report\StoreRequest;
 use App\Http\Resources\ReportResource;
 use App\Models\Report;
-use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
