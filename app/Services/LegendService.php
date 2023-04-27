@@ -54,7 +54,7 @@ class LegendService
             $statsId = Stat::firstOrCreate($this->parseStats($data['stats']))->id;
             $firstWeaponId = Weapon::firstOrCreate($this->parseWeapon($data['first_weapon']))->id;
             $secondWeaponId = Weapon::firstOrCreate($this->parseWeapon($data['second_weapon']))->id;
-            $legend = Legend::create([
+            $legend->update([
                 'name' => $data["name"],
                 'image' => $data["image"],
                 'history' => $data["history"],

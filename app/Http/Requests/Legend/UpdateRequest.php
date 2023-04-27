@@ -24,13 +24,12 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required|integer',
             'name' => 'string',
             'image' => 'string',
             'history' => 'string',
-            'first_weapon_id' => 'integer',//define struct
-            'second_weapon_id' => 'integer', //define struct
-            'stats_id' => 'integer',//define struct
+            'first_weapon' => '',//define struct
+            'second_weapon' => '', //define struct
+            'stats' => '',//define struct
         ];
     }
 }

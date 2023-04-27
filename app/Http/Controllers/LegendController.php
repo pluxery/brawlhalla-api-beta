@@ -8,6 +8,7 @@ use App\Http\Requests\Legend\UpdateRequest;
 use App\Http\Resources\LegendResource;
 use App\Models\Legend;
 use App\Services\LegendService;
+use function PHPUnit\Framework\returnArgument;
 
 class LegendController extends Controller
 {
@@ -43,6 +44,9 @@ class LegendController extends Controller
 
     public function update(UpdateRequest $request, Legend $legend)
     {
+
+        $data = $request->validated();
+        return new LegendResource($this->service->update($data, $legend));
 
     }
 
