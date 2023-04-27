@@ -23,6 +23,7 @@ class PostController extends Controller
 
     function index(FilterRequest $request): AnonymousResourceCollection
     {
+        dd(auth()->user());
         $data = $request->validated();
         $posts = $this->service->index($data);
         return PostResource::collection($posts);

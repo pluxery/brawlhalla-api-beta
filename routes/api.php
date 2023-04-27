@@ -1,11 +1,8 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\ReportController;
-use App\Http\Controllers\TagController;
-use App\Models\Post;
+use App\Actions\Fortify\CreateNewUser;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +22,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group([], function () {
+
+    Route::post("/login", LoginController::class);//todo make middleware!
+    Route::post("/register", RegisterController::class);//todo make middleware!
+
+
     require 'api/post.php';
     require 'api/comments.php';
     require 'api/reports.php';

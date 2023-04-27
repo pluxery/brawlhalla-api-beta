@@ -21,7 +21,6 @@ class LegendService
     function store($data)
     {
         try {
-
             DB::beginTransaction();
 
             $statsId = Stat::firstOrCreate($this->parseStats($data['stats']))->id;
