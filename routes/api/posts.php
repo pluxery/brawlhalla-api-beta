@@ -2,7 +2,7 @@
 
 
 use App\Http\Controllers\ResourceControllers\PostController;
-use App\Http\Controllers\UserToggleLikePost;
+use App\Http\Controllers\UserControllers\UserToggleLikePost;
 use Illuminate\Support\Facades\Route;
 
 

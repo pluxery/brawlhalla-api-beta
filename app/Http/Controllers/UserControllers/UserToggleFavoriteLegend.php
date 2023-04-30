@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\UserControllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\Legend;
-use App\Models\Post;
 use App\Models\User;
-use App\Models\UserFavoriteLegend;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class UserToggleFavoriteLegend extends Controller
 {

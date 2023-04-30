@@ -11,8 +11,8 @@ class LegendFilter extends AbstractFilter
     {
         return [
             'name' => [$this, 'name'],
-            'weapons_or' => [$this, 'weaponsOr'],
-            'weapons_and' => [$this, 'weaponsAnd'],
+            'weapons_or' => [$this, 'weaponsAny'],
+            'weapons_and' => [$this, 'weaponsAll'],
         ];
     }
 
@@ -22,14 +22,14 @@ class LegendFilter extends AbstractFilter
 
     }
 
-    function weaponsOr(Builder $queryBuilder,array $values): Builder
+    function weaponsAny(Builder $queryBuilder, array $values): Builder
     {
         return $queryBuilder->whereIn("first_weapon_id", $values)
             ->orWhereIn("second_weapon_id", $values);
 
     }
 
-    function weaponsAnd(Builder $queryBuilder, array $values): Builder
+    function weaponsAll(Builder $queryBuilder, array $values): Builder
     {
         return $queryBuilder->whereIn("first_weapon_id", $values)
             ->whereIn("second_weapon_id", $values);

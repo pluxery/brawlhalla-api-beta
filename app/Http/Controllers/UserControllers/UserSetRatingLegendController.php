@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\UserControllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\Legend;
 use App\Models\RatingLegend;
 use Illuminate\Http\Request;

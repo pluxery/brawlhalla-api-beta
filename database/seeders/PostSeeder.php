@@ -11,6 +11,7 @@ use App\Models\Report;
 use App\Models\Stat;
 use App\Models\Tag;
 use App\Models\User;
+use App\Models\UserPostLike;
 use App\Models\Weapon;
 use Database\Factories\PostTagFactory;
 use Illuminate\Database\Seeder;
@@ -27,6 +28,7 @@ class PostSeeder extends Seeder
         Category::factory(100)->create();
         Tag::factory(100)->create();
         Post::factory(100)->create();
+        UserPostLike::factory(100)->create();
         PostTag::factory(100)->create();
         Report::factory(20)->create();
         Comment::factory(150)->create();

@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\UserToggleFavoriteLegend;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,8 +30,6 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
 
 //public
 Route::group([], function () {
-    //todo give legend in controller (and post router make)
-    Route::post('legends/favorite', UserToggleFavoriteLegend::class);
     require 'api/posts.php';
     require 'api/tags.php';
     require 'api/categories.php';

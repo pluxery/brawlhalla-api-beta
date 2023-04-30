@@ -2,7 +2,8 @@
 
 
 use App\Http\Controllers\ResourceControllers\LegendController;
-use App\Http\Controllers\UserSetRatingLegendController;
+use App\Http\Controllers\UserControllers\UserSetRatingLegendController;
+use App\Http\Controllers\UserControllers\UserToggleFavoriteLegend;
 use Illuminate\Support\Facades\Route;
 
 
@@ -15,3 +16,4 @@ Route::controller(LegendController::class)->group(function () {
 
     Route::post("/legends/{legend}/update_rating", UserSetRatingLegendController::class);
 });
+Route::post('legends/favorite', UserToggleFavoriteLegend::class);
