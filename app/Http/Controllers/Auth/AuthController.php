@@ -29,6 +29,7 @@ class AuthController extends Controller
             return response()->json(['error' => 'login error'], 401);
         }
 
+        auth()->login(User::where('email', request(['email']))->first());
         return $this->respondWithToken($token);
     }
 

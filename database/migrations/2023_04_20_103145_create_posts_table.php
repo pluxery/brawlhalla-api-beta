@@ -26,7 +26,6 @@ class CreatePostsTable extends Migration
             $table->foreign('category_id', 'post_category_fk')->on('categories')->references('id');
             $table->index('category_id', 'post_category_idx');
 
-            $table->unsignedBigInteger('likes')->default(0);
             $table->timestamps();
         });
     }

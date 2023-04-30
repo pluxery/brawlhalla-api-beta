@@ -18,10 +18,8 @@ class PostFactory extends Factory
         return [
             'title' => $this->faker->sentence,
             'content' => $this->faker->text,
-            'likes' => random_int(0, 100),
             'category_id' => Category::get()->random()->id,
             'user_id' => User::get()->random()->id,
-
         ];
     }
 }

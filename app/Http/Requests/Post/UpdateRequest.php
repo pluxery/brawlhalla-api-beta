@@ -30,7 +30,6 @@ class UpdateRequest extends FormRequest
             'content' => 'string',
             'category' => '',
             'tags' => 'array',
-            'likes' => 'integer'
         ];
     }
 }

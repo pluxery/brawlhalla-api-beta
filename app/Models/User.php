@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -16,15 +17,13 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable, CanResetPassword;
 
-
+    protected $guarded = false;
 
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = Hash::make($password);
     }
 
-
-    protected $guarded = false;
 
     protected $hidden = [
         'password',
@@ -41,9 +40,14 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Post::class, 'user_id', 'id');
     }
 
-    function favoriteLegends(): HasMany
+    function likedPosts(): BelongsToMany
     {
-        return $this->hasMany(UserFavoriteLegend::class, 'user_id', 'id');
+        return $this->belongsToMany(User::class, 'user_post_likes', 'user_id', 'post_id');
+    }
+
+    function favoriteLegends(): BelongsToMany
+    {
+        return $this->belongsToMany(Legend::class, 'user_favorite_legends', 'user_id', 'legend_id');
     }
 
     public function getJWTIdentifier()
