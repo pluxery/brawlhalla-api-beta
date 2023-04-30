@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\ResourceControllers\Controller;
 use App\Models\Legend;
 use App\Models\RatingLegend;
 use Illuminate\Http\Request;
@@ -27,7 +26,6 @@ class UserSetRatingLegendController extends Controller
             ]);
 
             $legend->updateRating();
-
             DB::commit();
 
         } catch (\Exception $exception) {

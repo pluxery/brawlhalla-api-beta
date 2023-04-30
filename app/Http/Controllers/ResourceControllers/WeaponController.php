@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ResourceControllers;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\WeaponResource;
 use App\Models\Weapon;
 use Illuminate\Http\Request;

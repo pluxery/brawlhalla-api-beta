@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Legend;
-use App\Models\RatingLegend;
 use App\Models\UserFavoriteLegend;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\ResourceControllers\Controller;
 
 class UserAddFavoriteLegendController extends Controller
 {

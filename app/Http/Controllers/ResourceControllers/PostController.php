@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ResourceControllers;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\FilterRequest;
 use App\Http\Requests\Post\StoreRequest;
 use App\Http\Requests\Post\UpdateRequest;
@@ -42,7 +43,6 @@ class PostController extends Controller
 
     function update(UpdateRequest $request, Post $post)
     {
-
         $data = $request->validated();
         $this->service->update($data, $post);
         return new PostResource($post);

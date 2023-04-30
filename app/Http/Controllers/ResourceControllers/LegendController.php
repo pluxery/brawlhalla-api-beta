@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ResourceControllers;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Legend\FilterRequest;
 use App\Http\Requests\Legend\StoreRequest;
 use App\Http\Requests\Legend\UpdateRequest;

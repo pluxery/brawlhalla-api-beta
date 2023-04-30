@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ResourceControllers;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Stat\StoreStatRequest;
 use App\Http\Requests\Stat\UpdateStatRequest;
 use App\Models\Stat;

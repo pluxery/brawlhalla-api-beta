@@ -1,12 +1,6 @@
 <?php
 
-use App\Actions\Fortify\CreateNewUser;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\LogoutController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\ResourceControllers\UserController;
-use App\Http\Controllers\UserSetRatingLegendController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,23 +14,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+//auth
+Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
+    Route::post('register', [AuthController::class, 'register']);
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('refresh', [AuthController::class, 'refresh']);
+    Route::post('me', [AuthController::class, 'me']);
+    //private
+    Route::group(['middleware' => 'auth:api'], function () {
+
+    });
+
 });
 
+//public
 Route::group([], function () {
-
-    Route::post("/login", LoginController::class);//todo make middleware!
-    Route::post("/register", RegisterController::class);//todo make middleware!
-    Route::get("/logout", LogoutController::class);//todo make middleware!
-    Route::get("/users", [UserController::class, 'index']);
-
-
-    require 'api/post.php';
-    require 'api/comments.php';
-    require 'api/reports.php';
-    require 'api/categories.php';
+    require 'api/posts.php';
     require 'api/tags.php';
+    require 'api/categories.php';
     require 'api/legends.php';
     require 'api/weapons.php';
+    require 'api/comments.php';
+    require 'api/reports.php';
 });

@@ -10,7 +10,7 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            dd('fuck');
+            dd("fucking Authenticate middleware");
         }
     }
 }

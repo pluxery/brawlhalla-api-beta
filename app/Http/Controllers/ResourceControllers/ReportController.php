@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ResourceControllers;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Report\StoreRequest;
 use App\Http\Resources\ReportResource;
 use App\Models\Report;
