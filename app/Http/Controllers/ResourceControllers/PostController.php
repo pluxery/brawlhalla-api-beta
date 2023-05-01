@@ -8,10 +8,11 @@ use App\Http\Requests\Post\StoreRequest;
 use App\Http\Requests\Post\UpdateRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
+use App\Models\User;
 use App\Services\PostService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\Gate;
 
-//todo make policy
 class PostController extends Controller
 {
     public $service;
@@ -19,6 +20,7 @@ class PostController extends Controller
     function __construct(PostService $service)
     {
         $this->service = $service;
+        //$this->authorizeResource(Post::class, 'post');
     }
 
     function index(FilterRequest $request): AnonymousResourceCollection

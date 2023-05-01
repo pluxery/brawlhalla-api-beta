@@ -14,6 +14,7 @@ Route::controller(PostController::class)->group(function () {
     Route::delete('/posts/{post}', 'destroy')->name('posts.delete');
 
 });
-Route::post('/posts/like', UserToggleLikePost::class)->name('posts.like');
+Route::post('/posts/{post}/like', UserToggleLikePost::class)->name('posts.like');
+
 
 

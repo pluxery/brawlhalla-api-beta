@@ -25,12 +25,12 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-        Category::factory(100)->create();
-        Tag::factory(100)->create();
+        Category::factory(30)->create();
+        Tag::factory(30)->create();
         Post::factory(100)->create();
         UserPostLike::factory(100)->create();
-        PostTag::factory(100)->create();
+        PostTag::factory(80)->create();
         Report::factory(20)->create();
-        Comment::factory(150)->create();
+        Comment::factory(90)->create();
     }
 }

@@ -13,7 +13,6 @@ Route::controller(LegendController::class)->group(function () {
     Route::patch('/legends/{legend}', 'update')->name('legends.update');
     Route::post('/legends', 'store')->name('legends.store');
     Route::delete('/legends/{legend}', 'destroy')->name('legends.delete');
-
-    Route::post("/legends/{legend}/update_rating", UserSetRatingLegendController::class);
 });
-Route::post('legends/favorite', UserToggleFavoriteLegend::class);
+Route::post('/legends/{legend}/toggle_favorite', UserToggleFavoriteLegend::class);
+Route::post("/legends/{legend}/update_rating", UserSetRatingLegendController::class);

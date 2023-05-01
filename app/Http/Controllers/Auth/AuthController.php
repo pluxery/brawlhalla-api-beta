@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Cookie;
 
 class AuthController extends Controller
 {
@@ -17,20 +18,19 @@ class AuthController extends Controller
     public function register(StoreRequest $request): JsonResponse
     {
         $data = $request->validated();
-        User::create($data);
+        $user = User::create($data);
         return $this->login();
     }
 
     public function login(): JsonResponse
     {
         $credentials = request(['email', 'password']);
-
         if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'login error'], 401);
         }
 
-        auth()->login(User::where('email', request(['email']))->first());
-        return $this->respondWithToken($token);
+        $cookie = cookie('access_token', $token, 15);
+        return $this->respondWithToken($token)->withCookie($cookie);
     }
 
     public function me(): JsonResponse
@@ -41,7 +41,6 @@ class AuthController extends Controller
     public function logout(): JsonResponse
     {
         auth()->logout();
-
         return response()->json(['message' => 'Successfully logged out']);
     }
 

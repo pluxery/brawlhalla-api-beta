@@ -21,7 +21,7 @@ class CreateReportsTable extends Migration
 
 
             $table->unsignedBigInteger('post_id');
-            $table->foreign('post_id', 'report_post_fk')->on('posts')->references('id');
+            $table->foreign('post_id', 'report_post_fk')->on('posts')->references('id')->onDelete('cascade');
             $table->index('post_id', 'report_post_idx');
 
             $table->text('text');

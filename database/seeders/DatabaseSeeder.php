@@ -25,11 +25,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(100)->create();
+        User::factory(50)->create();
         (new PostSeeder)->run();
         (new LegendSeeder)->run();
 
-        UserFavoriteLegend::factory(200)->create();
+        UserFavoriteLegend::factory(70)->create();
 
     }
 }

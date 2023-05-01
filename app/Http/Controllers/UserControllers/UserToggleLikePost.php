@@ -10,13 +10,11 @@ use Illuminate\Http\Request;
 
 class UserToggleLikePost extends Controller
 {
-    function __invoke(Request $request)
+    function __invoke(Post $post, Request $request)
     {
         $request->validate([
-            'user_id' => 'required|integer',
-            'post_id' => 'required|integer'
+            'user_id' => 'required|integer'
         ]);
-        $post = Post::find($request->post_id);
         $user = User::find($request->user_id);
         $user->likedPosts()->toggle($post->id);
         return $post->likes;

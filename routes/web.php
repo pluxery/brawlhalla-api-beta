@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ResourceControllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,5 +16,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
+
+Route::get('/login', function () {
+    return view('Auth/login');
+})->name('login');
+
+Route::get('/register', function () {
+    return view('Auth/register');
+})->name('register');
+
+Route::get('/profile', function () {
+    return view('Auth/profile');
+})->name('profile');
+
+
+
 

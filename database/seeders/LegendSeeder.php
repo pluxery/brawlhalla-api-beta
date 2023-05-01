@@ -20,6 +20,6 @@ class LegendSeeder extends Seeder
         Weapon::factory(25)->create();
         Stat::factory(50)->create();
         Legend::factory(50)->create();
-        RatingLegend::factory(200)->create();
+        RatingLegend::factory(100)->create();
     }
 }

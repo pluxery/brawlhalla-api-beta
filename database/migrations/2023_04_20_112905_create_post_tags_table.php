@@ -18,7 +18,7 @@ class CreatePostTagsTable extends Migration
             $table->timestamps();
 
             $table->unsignedBigInteger('post_id');
-            $table->foreign('post_id', 'post_tags_post_fk')->on('posts')->references('id');
+            $table->foreign('post_id', 'post_tags_post_fk')->on('posts')->references('id')->onDelete('cascade');
             $table->index('post_id', 'post_tags_post_idx');
 
 
