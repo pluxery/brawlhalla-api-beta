@@ -20,15 +20,15 @@ class PostService
     {
         try {
             DB::beginTransaction();
-            $categoryId = Category::firstOrCreate(['name' => $data['category']['name']])->id;
-            $post = Post::create([
-                'title' => $data['title'],
-                'user_id' => $data['user_id'],
-                'content' => $data['content'],
-                'category_id' => $categoryId,
-
-            ]);
-            $post->tags()->attach($this->getTagIds($data['tags']));
+            if (isset($data['category'])) {
+                $categoryId = Category::firstOrCreate(['name' => $data['category']['name']])->id;
+                $data["category_id"] = $categoryId;
+                unset($data['category']);
+            }
+            $data['user_id'] = auth()->user()->id;
+            $post = Post::create($data);
+            if (isset($data['tags']))
+                $post->tags()->attach($this->getTagIds($data['tags']));
             DB::commit();
 
         } catch (\Exception $exception) {
@@ -40,15 +40,17 @@ class PostService
 
     function update($data, $post)
     {
+
         try {
             DB::beginTransaction();
-            $categoryId = Category::firstOrCreate(['name' => $data['category']['name']])->id;
-            $post->update([
-                'title' => $data['title'],
-                'content' => $data['content'],
-                'category_id' => $categoryId
-            ]);
-            $post->tags()->sync($this->getTagIds($data['tags']));
+            if (isset($data['category'])) {
+                $categoryId = Category::firstOrCreate(['name' => $data['category']['name']])->id;
+                $data["category_id"] = $categoryId;
+                unset($data['category']);
+            }
+            $post->update($data);
+            if (isset($data['tags']))
+                $post->tags()->sync($this->getTagIds($data['tags']));
             DB::commit();
 
         } catch (\Exception $exception) {

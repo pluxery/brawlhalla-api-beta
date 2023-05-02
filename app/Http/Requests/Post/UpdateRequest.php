@@ -26,7 +26,6 @@ class UpdateRequest extends FormRequest
         //todo add |nullable
         return [
             'title' => 'string',
-            'user_id' => 'required|integer',
             'content' => 'string',
             'category' => '',
             'tags' => 'array',

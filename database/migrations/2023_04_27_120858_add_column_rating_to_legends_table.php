@@ -26,7 +26,7 @@ class AddColumnRatingToLegendsTable extends Migration
     public function down()
     {
         Schema::table('legends', function (Blueprint $table) {
-            //
+            $table->removeColumn('rating');
         });
     }
 }

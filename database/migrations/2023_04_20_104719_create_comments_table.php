@@ -26,7 +26,6 @@ class CreateCommentsTable extends Migration
 
             $table->text('text');
 
-            $table->unsignedBigInteger('likes')->default(0);
             $table->timestamps();
         });
     }

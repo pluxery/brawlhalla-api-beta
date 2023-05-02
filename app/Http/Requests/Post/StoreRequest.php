@@ -25,7 +25,6 @@ class StoreRequest extends FormRequest
     {
         return [
             'title' => 'required|string',
-            'user_id' => 'required|integer',
             'content' => 'required|string',
             'category' => '',
             'tags' => 'array',

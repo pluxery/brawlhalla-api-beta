@@ -20,7 +20,7 @@ class PostController extends Controller
     function __construct(PostService $service)
     {
         $this->service = $service;
-        //$this->authorizeResource(Post::class, 'post');
+        $this->authorizeResource(Post::class, 'post');
     }
 
     function index(FilterRequest $request): AnonymousResourceCollection

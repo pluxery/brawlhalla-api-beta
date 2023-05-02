@@ -18,6 +18,7 @@ class LegendController extends Controller
     function __construct(LegendService $service)
     {
         $this->service = $service;
+        $this->authorizeResource(Legend::class, 'legend');
     }
 
     public function index(FilterRequest $request)

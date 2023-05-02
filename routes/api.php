@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\PostControllers\UserToggleLikePost;
 use App\Http\Controllers\ResourceControllers\CategoryController;
 use App\Http\Controllers\ResourceControllers\CommentController;
 use App\Http\Controllers\ResourceControllers\LegendController;
@@ -8,18 +9,17 @@ use App\Http\Controllers\ResourceControllers\PostController;
 use App\Http\Controllers\ResourceControllers\ReportController;
 use App\Http\Controllers\ResourceControllers\TagController;
 use App\Http\Controllers\ResourceControllers\WeaponController;
-use App\Http\Controllers\UserControllers\UserSetRatingLegendController;
-use App\Http\Controllers\UserControllers\UserToggleFavoriteLegend;
-use App\Http\Controllers\UserControllers\UserToggleLikePost;
+use App\Http\Controllers\LegendControllers\UserSetRatingLegendController;
+use App\Http\Controllers\LegendControllers\UserToggleFavoriteLegend;
 use Illuminate\Support\Facades\Route;
 
 //auth
 Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
-    Route::post('register', [AuthController::class, 'register'])->name('api.register');
-    Route::post('login', [AuthController::class, 'login'])->name('api.login');
-    Route::get('logout', [AuthController::class, 'logout'])->name('api.logout');
-    Route::post('refresh', [AuthController::class, 'refresh'])->name('api.refresh');
-    Route::post('me', [AuthController::class, 'me'])->name('api.me');
+    Route::post('/register', [AuthController::class, 'register'])->name('api.register');
+    Route::post('/login', [AuthController::class, 'login'])->name('api.login');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('api.logout');
+    Route::post('/refresh', [AuthController::class, 'refresh'])->name('api.refresh');
+    Route::post('/me', [AuthController::class, 'me'])->name('api.me');
     //private
     Route::group(['middleware' => 'auth:api'], function () {
 

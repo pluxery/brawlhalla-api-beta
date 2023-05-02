@@ -1,8 +1,8 @@
 <?php
 
 
+use App\Http\Controllers\PostControllers\UserToggleLikePost;
 use App\Http\Controllers\ResourceControllers\PostController;
-use App\Http\Controllers\UserControllers\UserToggleLikePost;
 use Illuminate\Support\Facades\Route;
 
 

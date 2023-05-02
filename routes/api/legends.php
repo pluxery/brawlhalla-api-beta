@@ -2,8 +2,8 @@
 
 
 use App\Http\Controllers\ResourceControllers\LegendController;
-use App\Http\Controllers\UserControllers\UserSetRatingLegendController;
-use App\Http\Controllers\UserControllers\UserToggleFavoriteLegend;
+use App\Http\Controllers\LegendControllers\UserSetRatingLegendController;
+use App\Http\Controllers\LegendControllers\UserToggleFavoriteLegend;
 use Illuminate\Support\Facades\Route;
 
 
