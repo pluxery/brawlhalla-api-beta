@@ -18,7 +18,8 @@ class CreateRatingLegendsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('legend_id');
             $table->foreign('user_id', 'rating_legends_user_fk')->on('users')->references('id');
-            $table->foreign('legend_id', 'rating_legends_legend_fk')->on('legends')->references('id');
+            $table->foreign('legend_id', 'rating_legends_legend_fk')->on('legends')->
+            references('id')->onDelete('cascade');
             $table->index('user_id', 'rating_legends_user_idx');
             $table->index('legend_id', 'rating_legends_legend_idx');
             $table->unsignedInteger('rating');

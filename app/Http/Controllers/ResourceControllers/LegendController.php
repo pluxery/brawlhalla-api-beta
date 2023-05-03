@@ -8,7 +8,9 @@ use App\Http\Requests\Legend\StoreRequest;
 use App\Http\Requests\Legend\UpdateRequest;
 use App\Http\Resources\LegendResource;
 use App\Models\Legend;
+use App\Policies\LegendPolicy;
 use App\Services\LegendService;
+use Illuminate\Support\Facades\Gate;
 
 class LegendController extends Controller
 {

@@ -19,7 +19,6 @@ class CommentFactory extends Factory
             'user_id' => User::get()->random()->id,
             'post_id' => Post::get()->random()->id,
             'text' => $this->faker->text,
-            'likes' => $this->faker->numberBetween(0, 1000),
         ];
     }
 }

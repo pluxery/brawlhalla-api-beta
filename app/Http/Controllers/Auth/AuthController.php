@@ -29,8 +29,8 @@ class AuthController extends Controller
             return response()->json(['error' => 'login error'], 401);
         }
 
-        $cookie = cookie('access_token', $token, 15);
-        return $this->respondWithToken($token)->withCookie($cookie);
+//        $cookie = cookie('access_token', $token, 60);
+        return $this->respondWithToken($token);
     }
 
     public function me(): JsonResponse

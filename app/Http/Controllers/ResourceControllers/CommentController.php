@@ -10,6 +10,11 @@ use App\Models\Comment;
 class CommentController extends Controller
 {
 
+    function __construct()
+    {
+        $this->authorizeResource(Comment::class, 'comment');
+    }
+
     function index()
     {
         return CommentResource::collection(Comment::all());
