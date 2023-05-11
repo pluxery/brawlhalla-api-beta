@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStatsTable extends Migration
+class AddColumnDescriptionToPostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class CreateStatsTable extends Migration
      */
     public function up()
     {
-        Schema::create('stats', function (Blueprint $table) {
-            $table->id();
-            $table->integer("attack");
-            $table->integer("dexterity");
-            $table->integer("defend");
-            $table->integer("speed");
-            $table->timestamps();
+        Schema::table('posts', function (Blueprint $table) {
+            $table->text('description')->after('title')->nullable();
         });
     }
 
@@ -30,6 +25,8 @@ class CreateStatsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stats');
+        Schema::table('posts', function (Blueprint $table) {
+            $table->removeColumn('description');
+        });
     }
 }

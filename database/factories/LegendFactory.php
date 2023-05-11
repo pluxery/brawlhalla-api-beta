@@ -21,7 +21,10 @@ class LegendFactory extends Factory
             "history" => $this->faker->text,
             "first_weapon_id" => Weapon::get()->random()->id,
             "second_weapon_id" => Weapon::get()->random()->id,
-            "stats_id" => Stat::get()->random()->id,
+            'attack' => random_int(1,10),
+            'dexterity' => random_int(1,10),
+            'defend' => random_int(1,10),
+            'speed' => random_int(1,10),
         ];
     }
 }

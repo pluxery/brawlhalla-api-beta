@@ -4,17 +4,45 @@ namespace App\Http\Controllers\ResourceControllers;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\UpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Services\UserService;
 
 class UserController extends Controller
 {
-    function index()
+
+
+    /**
+     * @var UserService
+     */
+    private $service;
+
+    function __construct(UserService $service)
     {
-        //todo get legend model [returned UserFavoriteLegends model]
-        $user = User::find(19);
-        dd($user->favoriteLegends);
+        $this->service = $service;
+    }
+
+    function index()
+    {   //todo maybe use filter letter
+        $users = User::all();
         return UserResource::collection($users);
+    }
+
+    function show(User $user)
+    {
+        return new UserResource($user);
+
+    }
+
+    function update(UpdateRequest $request, User $user)
+    {
+        $data = $request->validated();
+        $result = $this->service->update($data, $user);
+        if ($result instanceof User){
+            return new UserResource($result);
+        }
+        return $result;
 
     }
 }

@@ -16,32 +16,27 @@ class Post extends Model
 
     protected $guarded = false;
 
-
-    function category(): BelongsTo
-    {
+    function category(): BelongsTo {
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
-    function author(): BelongsTo
-    {
+    function author(): BelongsTo {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    function tags(): BelongsToMany
-    {
+    function tags(): BelongsToMany {
         return $this->belongsToMany(Tag::class, 'post_tags', 'post_id', 'tag_id');
     }
-    function likes(): BelongsToMany
-    {
+    function likes(): BelongsToMany {
         return $this->belongsToMany(User::class, 'user_post_likes', 'post_id', 'user_id');
     }
 
-    public function comments()
-    {
+    public function comments() {
         return $this->hasMany(Comment::class);
     }
-    public function reports()
-    {
+    public function reports() {
         return $this->hasMany(Report::class);
     }
+
+
 }

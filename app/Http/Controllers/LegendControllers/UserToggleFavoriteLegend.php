@@ -11,11 +11,7 @@ class UserToggleFavoriteLegend extends Controller
 {
     function __invoke(Legend $legend, Request $request)
     {
-        $request->validate([
-            "user_id" => "required|integer",
-        ]);
-
-        $user = User::find($request->user_id);
+        $user = User::find(auth()->user()->id);
         $user->favoriteLegends()->toggle($legend->id);
         return $user->favoriteLegends;
 

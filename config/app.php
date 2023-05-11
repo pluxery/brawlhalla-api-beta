@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         //App\Providers\FortifyServiceProvider::class
+        // Illuminate\Routing\Middleware\SubstituteBindings::class,
 
     ],
 

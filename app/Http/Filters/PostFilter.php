@@ -4,6 +4,7 @@
 namespace App\Http\Filters;
 
 
+use App\Models\PostTag;
 use Illuminate\Database\Eloquent\Builder;
 
 class PostFilter extends AbstractFilter
@@ -12,13 +13,18 @@ class PostFilter extends AbstractFilter
     protected function getCallbacks(): array
     {
         return [
+            'tag' =>[$this, 'tag'],
             'title' => [$this, 'title'],
             'content' => [$this, 'content'],
             'category' => [$this, 'category'],
-            'author' => [$this, 'author'],
+            'author' => [$this, 'author']
         ];
     }
-
+    public function tag(Builder $queryBuilder, $value): Builder
+    {
+        $posts =  PostTag::select('post_id')->where('tag_id', "$value")->get();
+        return $queryBuilder->whereIn('id', $posts);
+    }
     public function title(Builder $queryBuilder, $value): Builder
     {
 
@@ -40,6 +46,4 @@ class PostFilter extends AbstractFilter
     {
         return $queryBuilder->where('user_id', '=', "{$value}");
     }
-
-    //create filter by date
 }

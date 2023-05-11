@@ -15,7 +15,7 @@ class CreateLegendsTable extends Migration
     {
         Schema::create('legends', function (Blueprint $table) {
             $table->id();
-            //without indexes because this db contains < 100 items
+
             $table->string('name');
             $table->unsignedBigInteger("first_weapon_id");
             $table->unsignedBigInteger("second_weapon_id");
@@ -23,8 +23,12 @@ class CreateLegendsTable extends Migration
             $table->foreign("second_weapon_id", "legend_weapon2_fk")->on("weapons")->references("id");
             $table->text("history")->nullable();
             $table->string("image");
-            $table->unsignedBigInteger("stats_id");
-            $table->foreign("stats_id", "legend_stat_fk")->on("stats")->references("id");
+
+            $table->integer("attack");
+            $table->integer("dexterity");
+            $table->integer("defend");
+            $table->integer("speed");
+
             $table->timestamps();
         });
     }

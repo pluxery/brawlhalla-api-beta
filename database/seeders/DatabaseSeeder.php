@@ -8,7 +8,6 @@ use App\Models\Legend;
 use App\Models\Post;
 use App\Models\PostTag;
 use App\Models\Report;
-use App\Models\Stat;
 use App\Models\Tag;
 use App\Models\User;
 use App\Models\UserFavoriteLegend;
@@ -25,11 +24,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(50)->create();
-        (new PostSeeder)->run();
+        (new UserSeeder)->run();
         (new LegendSeeder)->run();
-
-        UserFavoriteLegend::factory(70)->create();
-
+        (new PostSeeder)->run();
     }
 }

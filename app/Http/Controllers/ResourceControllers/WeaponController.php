@@ -19,12 +19,12 @@ class WeaponController extends Controller
 
     public function store(Request $request)
     {
-        //
+     
     }
 
     public function show(Weapon $weapon)
     {
-        //
+        return new WeaponResource($weapon);
     }
 
 

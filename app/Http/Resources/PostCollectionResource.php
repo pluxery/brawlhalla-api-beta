@@ -2,14 +2,13 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Category;
-use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PostResource extends JsonResource
+
+class PostCollectionResource extends JsonResource
 {
     /**
-     * Transform the resource into an array.
+     * Transform the resource collection into an array.
      *
      * @param \Illuminate\Http\Request $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
@@ -20,14 +19,17 @@ class PostResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'author' => new UserResource($this->author),
-            'content' => $this->content,
+            'author' => [
+                'id' => $this->author->id,
+                'name' => $this->author->name
+            ],
+            //'content' => $this->content,
             'likes' => $this->likes->count(),
             'category' => new CategoryResource($this->category),
             'tags' => TagResource::collection($this->tags),
             'created_at' => date(' D M, Y', strtotime($this->created_at)),
             'updated_at' => date(' D M, Y', strtotime($this->updated_at)),
-            'comments' => CommentResource::collection($this->comments)
+            'comments' => $this->comments->count()
         ];
     }
 }

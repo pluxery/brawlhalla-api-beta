@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -49,6 +50,19 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->belongsToMany(Legend::class, 'user_favorite_legends', 'user_id', 'legend_id');
     }
+
+    function subscriptions(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'subscriptions', 'user_id', 'subscription_id')
+            ->select(['subscription_id', 'name', 'avatar', 'elo']);
+    }
+
+    function subscribers()
+    {
+        return $this->hasMany(Subscription::class, 'subscription_id', 'id');
+
+    }
+
 
     public function getJWTIdentifier()
     {

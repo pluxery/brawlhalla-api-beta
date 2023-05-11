@@ -11,8 +11,7 @@ class UpdateRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 
@@ -21,13 +20,11 @@ class UpdateRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
-        //todo add |nullable
+    public function rules() {
         return [
             'title' => 'string',
             'content' => 'string',
-            'category' => '',
+            'category' => 'string',
             'tags' => 'array',
         ];
     }

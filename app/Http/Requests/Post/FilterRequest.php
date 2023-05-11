@@ -24,11 +24,11 @@ class FilterRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => '',
-            'author' => '',
-            'content' => '',
-            'category' => '',
-            'tags' => '',
+            'title' => 'string',
+            'author' => 'integer',
+            'content' => 'string',
+            'category' => 'integer',
+            'tag' => 'integer',
         ];
     }
 }

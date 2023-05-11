@@ -28,9 +28,9 @@ class PostSeeder extends Seeder
         Category::factory(30)->create();
         Tag::factory(30)->create();
         Post::factory(100)->create();
-        UserPostLike::factory(100)->create();
-        PostTag::factory(80)->create();
+        UserPostLike::factory(500)->create();
+        PostTag::factory(120)->create();
         Report::factory(20)->create();
-        Comment::factory(90)->create();
+        Comment::factory(200)->create();
     }
 }
