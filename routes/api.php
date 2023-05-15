@@ -1,21 +1,25 @@
 <?php
 
 
+use App\Http\Actions\AddComment;
+use App\Http\Actions\AddSubscription;
+use App\Http\Actions\DeleteSubscription;
+use App\Http\Actions\GetFavoriteLegends;
+use App\Http\Actions\GetLikedPosts;
+use App\Http\Actions\GetSubscribers;
+use App\Http\Actions\GetSubscriptions;
+use App\Http\Actions\SetRatingLegend;
+use App\Http\Actions\ToggleFavoriteLegend;
+use App\Http\Actions\ToggleLikePost;
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\GetUserSubscribersController;
-use App\Http\Controllers\SubscriptionController;
-use App\Http\Controllers\PostControllers\UserToggleLikePost;
-use App\Http\Controllers\PostControllers\AddCommentToPostController;
 use App\Http\Controllers\ResourceControllers\CategoryController;
 use App\Http\Controllers\ResourceControllers\CommentController;
 use App\Http\Controllers\ResourceControllers\LegendController;
 use App\Http\Controllers\ResourceControllers\PostController;
 use App\Http\Controllers\ResourceControllers\ReportController;
 use App\Http\Controllers\ResourceControllers\TagController;
-use App\Http\Controllers\ResourceControllers\WeaponController;
-use App\Http\Controllers\LegendControllers\UserSetRatingLegendController;
-use App\Http\Controllers\LegendControllers\UserToggleFavoriteLegend;
 use App\Http\Controllers\ResourceControllers\UserController;
+use App\Http\Controllers\ResourceControllers\WeaponController;
 use Illuminate\Support\Facades\Route;
 
 //auth
@@ -33,11 +37,13 @@ Route::controller(UserController::class)->group(function () {
     Route::patch('/users/{user}', 'update');
 });
 
-Route::get('/users/{user}/subscriptions', [SubscriptionController::class, 'index']);
-Route::get('/users/{user}/subscribers', GetUserSubscribersController::class);
-Route::get('/subscriptions/{subscription}/add', [SubscriptionController::class, 'store']);
-Route::delete('/subscriptions/{subscription}/delete', [SubscriptionController::class, 'destroy']);
+Route::get('/users/{user}/subscriptions', GetSubscriptions::class);
+Route::get('/subscriptions/{subscription}/add', AddSubscription::class);
+Route::delete('/subscriptions/{subscription}/delete', DeleteSubscription::class);
 
+Route::get('/users/{user}/subscribers', GetSubscribers::class);
+Route::get('/users/{user}/liked_posts', GetLikedPosts::class);
+Route::get('/users/{user}/favorite_legends', GetFavoriteLegends::class);
 
 Route::controller(PostController::class)->group(function () {
     Route::get('/posts', 'index');
@@ -47,8 +53,8 @@ Route::controller(PostController::class)->group(function () {
     Route::delete('/posts/{post}', 'destroy');
 
 });
-Route::post('/posts/{post}/like', UserToggleLikePost::class);
-Route::post('/posts/{post}/comment', AddCommentToPostController::class);
+Route::get('/posts/{post}/like', ToggleLikePost::class);
+Route::post('/posts/{post}/comment', AddComment::class);
 
 Route::controller(CommentController::class)->group(function () {
     Route::delete('/comments/{comment}', 'destroy');
@@ -61,8 +67,8 @@ Route::controller(LegendController::class)->group(function () {
     Route::post('/legends', 'store');
     Route::delete('/legends/{legend}', 'destroy');
 });
-Route::get('/legends/{legend}/toggle_favorite', UserToggleFavoriteLegend::class);
-Route::post("/legends/{legend}/update_rating", UserSetRatingLegendController::class);
+Route::get('/legends/{legend}/toggle_favorite', ToggleFavoriteLegend::class);
+Route::post("/legends/{legend}/update_rating", SetRatingLegend::class);
 
 Route::controller(WeaponController::class)->group(function () {
     Route::get('/weapons', 'index');

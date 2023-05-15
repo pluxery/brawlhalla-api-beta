@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\LegendControllers;
+namespace App\Http\Actions;
 
 use App\Http\Controllers\Controller;
 use App\Models\Legend;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class UserToggleFavoriteLegend extends Controller
+class ToggleFavoriteLegend extends Controller
 {
     function __invoke(Legend $legend, Request $request)
     {

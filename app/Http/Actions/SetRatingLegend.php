@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\LegendControllers;
+namespace App\Http\Actions;
 
 use App\Http\Controllers\Controller;
 use App\Models\Legend;
 use App\Models\RatingLegend;
-use App\Policies\LegendPolicy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class UserSetRatingLegendController extends Controller
+class SetRatingLegend extends Controller
 {
     function __invoke(Legend $legend, Request $request)
     {

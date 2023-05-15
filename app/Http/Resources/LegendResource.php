@@ -13,7 +13,10 @@ class LegendResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'image' => $this->image,
-            'stats' => new StatResource($this->stats),
+            'attack' => $this->attack,
+            'defend' => $this->defend,
+            'dexterity' => $this->dexterity,
+            'speed' => $this->speed,
             'weapons' => [
                 new WeaponResource($this->first_weapon),
                 new WeaponResource($this->second_weapon)

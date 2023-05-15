@@ -24,7 +24,7 @@ class UserController extends Controller
     }
 
     function index()
-    {   //todo maybe use filter letter
+    {
         $users = User::all();
         return UserResource::collection($users);
     }

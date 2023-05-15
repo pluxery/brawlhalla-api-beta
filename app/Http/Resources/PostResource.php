@@ -22,7 +22,7 @@ class PostResource extends JsonResource
             'description' => $this->description,
             'author' => new UserResource($this->author),
             'content' => $this->content,
-            'likes' => $this->likes->count(),
+            'likes' => $this->likes,
             'category' => new CategoryResource($this->category),
             'tags' => TagResource::collection($this->tags),
             'created_at' => date(' D M, Y', strtotime($this->created_at)),
