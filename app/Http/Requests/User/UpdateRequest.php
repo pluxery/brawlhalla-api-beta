@@ -25,6 +25,7 @@ class UpdateRequest extends FormRequest
             ],
             'avatar' => ['string'],
             'favorite_legends' => ['array'],
+            'steam_link' => ['string'],
             'elo' => ['integer', 'min:750', 'max:3000']
         ];
     }

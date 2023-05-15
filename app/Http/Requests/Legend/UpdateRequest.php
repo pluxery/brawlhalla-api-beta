@@ -27,9 +27,12 @@ class UpdateRequest extends FormRequest
             'name' => 'string',
             'image' => 'string',
             'history' => 'string',
-            'first_weapon' => '',//define struct
-            'second_weapon' => '', //define struct
-            'stats' => '',//define struct
+            'first_weapon' => '',
+            'second_weapon' => '',
+            'attack' => 'integer',
+            'dexterity' => '|integer',
+            'defend' => 'integer',
+            'speed' => 'integer',
         ];
     }
 }

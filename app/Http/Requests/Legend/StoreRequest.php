@@ -20,7 +20,11 @@ class StoreRequest extends FormRequest
             'history' => 'string',
             'first_weapon' => '',//define struct
             'second_weapon' => '', //define struct
-            'stats' => '',//define struct
+            'attack' => 'required|integer',
+            'dexterity' => 'required|integer',
+            'defend' => 'required|integer',
+            'speed' => 'required|integer',
+
         ];
     }
 }
