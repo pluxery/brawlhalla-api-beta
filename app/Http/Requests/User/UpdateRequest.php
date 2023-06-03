@@ -8,12 +8,12 @@ use Illuminate\Validation\Rule;
 
 class UpdateRequest extends FormRequest
 {
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'name' => ['string', 'max:255'],

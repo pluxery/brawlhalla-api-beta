@@ -20,9 +20,9 @@ class LegendService
     function store($data)
     {
         try {
+            //TODO add stats to create(...)
             DB::beginTransaction();
 
-            $statsId = Stat::firstOrCreate($this->parseStats($data['stats']))->id;
             $firstWeaponId = Weapon::firstOrCreate($this->parseWeapon($data['first_weapon']))->id;
             $secondWeaponId = Weapon::firstOrCreate($this->parseWeapon($data['second_weapon']))->id;
 
@@ -32,7 +32,7 @@ class LegendService
                 'history' => $data["history"],
                 'first_weapon_id' => $firstWeaponId,
                 'second_weapon_id' => $secondWeaponId,
-                'stats_id' => $statsId,
+
             ]);
             DB::commit();
 
@@ -47,10 +47,9 @@ class LegendService
     function update($data, Legend $legend)
     {
         try {
-
+            //TODO add stats to update(...)
             DB::beginTransaction();
 
-            $statsId = Stat::firstOrCreate($this->parseStats($data['stats']))->id;
             $firstWeaponId = Weapon::firstOrCreate($this->parseWeapon($data['first_weapon']))->id;
             $secondWeaponId = Weapon::firstOrCreate($this->parseWeapon($data['second_weapon']))->id;
             $legend->update([
@@ -59,7 +58,6 @@ class LegendService
                 'history' => $data["history"],
                 'first_weapon_id' => $firstWeaponId,
                 'second_weapon_id' => $secondWeaponId,
-                'stats_id' => $statsId,
             ]);
             DB::commit();
 

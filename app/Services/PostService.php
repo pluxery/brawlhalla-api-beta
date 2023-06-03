@@ -7,22 +7,30 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class PostService
 {
-    public function index($data) {
+    public function index($data)
+    {
         $filter = app()->make(PostFilter::class, ['queryParams' => array_filter($data)]);
         return Post::filter($filter)->orderBy('created_at', 'desc')->paginate(10);
     }
 
-    function store($data) {
+    function store($data)
+    {
         try {
             DB::beginTransaction();
-
+            if (isset($data['image'])) {
+                $data['image'] = Storage::disk('public')->put('/post_images', $data['image']);
+            }else {
+                $data['image'] = 'post_images/default_img.jpg';
+            }
             $post = Post::create([
-                'user_id'=>auth()->user()->id,
+                'user_id' => auth()->user()->id,
                 'title' => $data['title'],
-                'content' => $data['content']
+                'content' => $data['content'],
+                'image' => $data['image'] ?? null
             ]);
             if (isset($data['category'])) {
                 $post->update([
@@ -44,10 +52,14 @@ class PostService
         return $post;
     }
 
-    function update($data, $post) {
+    function update($data, $post)
+    {
 
         try {
             DB::beginTransaction();
+            if (isset($data['image'])) {
+                $data['image'] = Storage::disk('public')->put('/post_images', $data['image']);
+            }
             if (isset($data['category'])) {
                 $categoryId = Category::firstOrCreate(['name' => $data['category']])->id;
                 $data["category_id"] = $categoryId;
@@ -66,7 +78,9 @@ class PostService
         }
         return $post;
     }
-    private function getTagIds($tags): array {
+
+    private function getTagIds($tags): array
+    {
         $result = [];
         foreach ($tags as $tag) {
             $result[] = Tag::firstOrCreate(['name' => $tag])->id;

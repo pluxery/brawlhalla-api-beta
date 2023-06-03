@@ -19,12 +19,13 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
+            'steam_link' => $this->steam_link,
+            'about' => $this->about,
             'elo' => $this->elo,
-            'avatar' => $this->avatar,
+            'avatar' =>  url('storage/' . $this->avatar),
             'is_admin' => $this->is_admin,
-            'created_at' => $this->created_at,
+            'created_at' => date(' D M, Y', strtotime($this->created_at)),
 
-            //'friends'=> $this->friends
         ];
     }
 }

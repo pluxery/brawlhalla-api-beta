@@ -19,6 +19,7 @@ class PostCollectionResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
+            'image' => $this->image ? url('storage/' . $this->image) : null,
             'author' => [
                 'id' => $this->author->id,
                 'name' => $this->author->name

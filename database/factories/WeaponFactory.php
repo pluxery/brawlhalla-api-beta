@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Storage;
 
 class WeaponFactory extends Factory
 {
@@ -15,7 +16,7 @@ class WeaponFactory extends Factory
     {
         return [
             'name' => $this->faker->word,
-            'image'=>$this->faker->imageUrl
+            'image'=> "weapons/Blasters_Icon.webp"
         ];
     }
 }

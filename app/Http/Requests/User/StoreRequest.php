@@ -26,8 +26,7 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-
-                'name' => ['required', 'string', 'max:255'],
+                'name' => "required|string|max:255",
                 'email' => [
                     'required',
                     'string',
@@ -35,7 +34,8 @@ class StoreRequest extends FormRequest
                     'max:255',
                     Rule::unique(User::class),
                 ],
-                'password' => ['string', 'min:6'],
-        ];
+                'password' => 'string|min:6'
+            ];
     }
+        
 }

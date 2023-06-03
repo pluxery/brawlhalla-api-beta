@@ -43,6 +43,5 @@ class UserController extends Controller
             return new UserResource($result);
         }
         return $result;
-
     }
 }

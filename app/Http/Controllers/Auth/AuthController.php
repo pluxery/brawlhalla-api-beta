@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ResourceControllers\UserController;
 use App\Http\Requests\User\StoreRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
@@ -17,9 +20,16 @@ class AuthController extends Controller
 
     public function register(StoreRequest $request): JsonResponse
     {
+
         $data = $request->validated();
+
+        $data['avatar'] = 'users/default_avatar_bodwar.png';
         $user = User::create($data);
-        return $this->login();
+        $credentials = request(['email', 'password']);
+        if (!$token = auth()->attempt($credentials)) {
+            return response()->json(['error' => 'login error'], 401);
+        }
+        return $this->respondWithToken($token);
     }
 
     public function login(): JsonResponse
@@ -28,14 +38,13 @@ class AuthController extends Controller
         if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'login error'], 401);
         }
-
 //        $cookie = cookie('access_token', $token, 60);
         return $this->respondWithToken($token);
     }
 
-    public function me(): JsonResponse
+    public function me(): UserResource
     {
-        return response()->json(auth()->user());
+        return new UserResource(auth()->user());
     }
 
     public function logout(): JsonResponse

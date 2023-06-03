@@ -22,6 +22,7 @@ class UpdateRequest extends FormRequest
      */
     public function rules() {
         return [
+            'image' => 'file',
             'title' => 'string',
             'content' => 'string',
             'category' => 'string',

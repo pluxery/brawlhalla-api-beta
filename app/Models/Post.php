@@ -31,10 +31,12 @@ class Post extends Model
         return $this->belongsToMany(User::class, 'user_post_likes', 'post_id', 'user_id');
     }
 
-    public function comments() {
-        return $this->hasMany(Comment::class);
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class)->orderByDesc('created_at');
     }
-    public function reports() {
+    public function reports(): HasMany
+    {
         return $this->hasMany(Report::class);
     }
 
