@@ -21,7 +21,8 @@ class CreateUserPostLikesTable extends Migration
             $table->index('post_id', 'user_post_likes_post_idx');
 
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id', 'user_post_likes_user_fk')->on('users')->references('id');
+            $table->foreign('user_id', 'user_post_likes_user_fk')->on('users')->references('id')
+                ->onDelete('cascade');;
             $table->index('user_id', 'user_post_likes_user_idx');
 
             $table->timestamps();

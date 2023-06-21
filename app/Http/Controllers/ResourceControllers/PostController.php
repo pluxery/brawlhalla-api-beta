@@ -11,6 +11,7 @@ use App\Http\Resources\PostResource;
 use App\Models\Post;
 use App\Models\User;
 use App\Services\PostService;
+use Error;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Gate;
 
@@ -34,13 +35,13 @@ class PostController extends Controller
         return new PostResource($post);
     }
 
-    function store(StoreRequest $request): PostResource {
+    function store(StoreRequest $request) {
         $data = $request->validated();
         $post = $this->service->store($data);
         if ($post instanceof Post) {
             return new PostResource($post);
         }
-        return $post;
+        return response()->json(["message" => "error"], 422)->withException(new Error("error!"));
     }
 
     function update(UpdateRequest $request, Post $post) {

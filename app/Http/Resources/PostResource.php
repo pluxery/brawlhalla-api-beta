@@ -26,8 +26,8 @@ class PostResource extends JsonResource
             'likes' => $this->likes,
             'category' => new CategoryResource($this->category),
             'tags' => TagResource::collection($this->tags),
-            'created_at' => date(' D M, Y', strtotime($this->created_at)),
-            'updated_at' => date(' D M, Y', strtotime($this->updated_at)),
+            'created_at' => date("F j, Y, g:i a", strtotime($this->created_at)),
+            'updated_at' => date("F j, Y, g:i a", strtotime($this->updated_at)),
             'comments' => CommentResource::collection($this->comments)
         ];
     }

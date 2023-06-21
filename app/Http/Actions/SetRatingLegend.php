@@ -16,17 +16,12 @@ class SetRatingLegend extends Controller
             "rating" => "required|integer",
         ]);
         try {
-            DB::beginTransaction();
             RatingLegend::create([
                 "rating" => $request['rating'],
                 "legend_id" => $legend->id,
                 "user_id" => auth()->user()->id
             ]);
-            $legend->updateRating();
-            DB::commit();
-
-        } catch (\Exception $exception) {
-            DB::rollBack();
+        } catch (\Exception $exception) { 
             return $exception->getMessage();
         }
         return $legend->rating;

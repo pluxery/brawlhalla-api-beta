@@ -6,7 +6,7 @@ use App\Models\Traits\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Legend extends Model
 {
@@ -15,10 +15,6 @@ class Legend extends Model
 
     protected $guarded = false;
 
-    function stats(): BelongsTo
-    {
-        return $this->belongsTo(Stat::class, 'stats_id', 'id');
-    }
 
     function first_weapon(): BelongsTo
     {
@@ -30,10 +26,9 @@ class Legend extends Model
         return $this->belongsTo(Weapon::class, 'second_weapon_id', 'id');
     }
 
-    function updateRating(): void
+    function rated_users():HasMany
     {
         $table = $this->hasMany(RatingLegend::class);
-        $this->rating = $table->sum('rating') / $table->count();
-        $this->setAttribute("rating", $table->sum('rating') / $table->count());
+        return $table;
     }
 }

@@ -14,9 +14,10 @@ class WeaponFactory extends Factory
      */
     public function definition()
     {
+        $idx = random_int(0, 7);
         return [
             'name' => $this->faker->word,
-            'image'=> "weapons/Blasters_Icon.webp"
+            'image'=> "weapons/weapon_${idx}.webp"
         ];
     }
 }

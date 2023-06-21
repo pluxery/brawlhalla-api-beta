@@ -13,6 +13,7 @@ use App\Policies\LegendPolicy;
 use App\Policies\PostPolicy;
 use App\Policies\ReportPolicy;
 use App\Policies\SubscriptionPolicy;
+use App\Policies\UserPolicy;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -31,6 +32,7 @@ class AuthServiceProvider extends ServiceProvider
         Comment::class => CommentPolicy::class,
         Report::class => ReportPolicy::class,
         Subscription::class => SubscriptionPolicy::class,
+        User::class => UserPolicy::class
     ];
 
     /**

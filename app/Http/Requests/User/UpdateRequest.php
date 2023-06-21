@@ -17,13 +17,14 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => ['string', 'max:255'],
+            'about' => ['string'],
             'email' => [
                 'string',
                 'email',
                 'max:255',
                 Rule::unique(User::class),
             ],
-            'avatar' => ['string'],
+            'avatar' => ['file'],
             'favorite_legends' => ['array'],
             'steam_link' => ['string'],
             'elo' => ['integer', 'min:750', 'max:3000']

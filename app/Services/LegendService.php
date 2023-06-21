@@ -78,13 +78,5 @@ class LegendService
         ];
     }
 
-    private function parseStats(array $stats): array
-    {
-        return [
-            'attack' => $stats['attack'],
-            'dexterity' => $stats['dexterity'],
-            'defend' => $stats['defend'],
-            'speed' => $stats['speed']
-        ];
-    }
+    
 }

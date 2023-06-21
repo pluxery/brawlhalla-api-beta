@@ -11,34 +11,33 @@ use Illuminate\Support\Facades\Storage;
 
 class PostService
 {
-    public function index($data)
-    {
+    public function index($data) {
         $filter = app()->make(PostFilter::class, ['queryParams' => array_filter($data)]);
         return Post::filter($filter)->orderBy('created_at', 'desc')->paginate(10);
     }
 
-    function store($data)
-    {
+    function store($data) {
+
         try {
             DB::beginTransaction();
             if (isset($data['image'])) {
                 $data['image'] = Storage::disk('public')->put('/post_images', $data['image']);
-            }else {
-                $data['image'] = 'post_images/default_img.jpg';
+            } else {
+                $data['image'] = 'post_images/post_3.jpg';
             }
             $post = Post::create([
                 'user_id' => auth()->user()->id,
                 'title' => $data['title'],
                 'content' => $data['content'],
-                'image' => $data['image'] ?? null
+                'image' => $data['image']
             ]);
             if (isset($data['category'])) {
                 $post->update([
-                    'category_id' => Category::firstOrCreate([
-                        'name' => $data['category']])->id
+                    'category_id' => Category::firstOrCreate(['name' => $data['category']])->id
                 ]);
             }
             if (isset($data['tags'])) {
+                $data['tags'] = json_decode($data['tags']);
                 $post->tags()->sync($this->getTagIds($data['tags']));
             }
 
@@ -52,8 +51,7 @@ class PostService
         return $post;
     }
 
-    function update($data, $post)
-    {
+    function update($data, $post) {
 
         try {
             DB::beginTransaction();
@@ -66,6 +64,7 @@ class PostService
                 unset($data['category']);
             }
             if (isset($data['tags'])) {
+                $data['tags'] = json_decode($data['tags']);
                 $post->tags()->sync($this->getTagIds($data['tags']));
                 unset($data['tags']);
             }
@@ -79,8 +78,8 @@ class PostService
         return $post;
     }
 
-    private function getTagIds($tags): array
-    {
+    private function getTagIds($tags): array {
+
         $result = [];
         foreach ($tags as $tag) {
             $result[] = Tag::firstOrCreate(['name' => $tag])->id;

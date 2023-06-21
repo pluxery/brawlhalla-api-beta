@@ -18,7 +18,8 @@ class CreateUserFavoriteLegendsTable extends Migration
 
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('legend_id');
-            $table->foreign('user_id', 'user_favorite_legends_user_fk')->on('users')->references('id');
+            $table->foreign('user_id', 'user_favorite_legends_user_fk')->on('users')->references('id')
+                ->onDelete('cascade');;
             $table->foreign('legend_id', 'user_favorite_legends_legend_fk')->on('legends')->references('id')->onDelete('cascade');
 
             $table->timestamps();

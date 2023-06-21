@@ -28,7 +28,7 @@ class StoreRequest extends FormRequest
             'image' => 'file',
             'content' => 'required|string',
             'category' => 'string',
-            'tags' => 'array',
+            'tags' => '',
 
         ];
     }

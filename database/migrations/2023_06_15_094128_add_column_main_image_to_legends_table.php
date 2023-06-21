@@ -2,10 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class SetAvatarColumnDataNullUsersTable extends Migration
+class AddColumnMainImageToLegendsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +13,8 @@ class SetAvatarColumnDataNullUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //DB::statement("UPDATE users SET avatar = NULL");
+        Schema::table('legends', function (Blueprint $table) {
+            $table->string('main_image')->nullable();
         });
     }
 
@@ -26,6 +25,8 @@ class SetAvatarColumnDataNullUsersTable extends Migration
      */
     public function down()
     {
-
+        Schema::table('legends', function (Blueprint $table) {
+            $table->dropColumn('main_image');
+        });
     }
 }

@@ -16,16 +16,23 @@ class LegendFactory extends Factory
      */
     public function definition()
     {
+
+        $imgIndex = random_int(0, 7);
+
         return [
-            "name"=>$this->faker->firstName,
-            "image"=>  "legends/ada_avatar.webp",
+            "name" => $this->faker->firstName,
+            //ТУТ ИМЕНА НАПУТАЛ КАРТИНОК НО НИЧЕГО СТРАШНОГО
+            "image" => "legends/avatars/main_${imgIndex}.webp",
+            "main_image" => "legends/body/avatar_${imgIndex}.webp",
             "history" => $this->faker->text,
             "first_weapon_id" => Weapon::get()->random()->id,
             "second_weapon_id" => Weapon::get()->random()->id,
-            'attack' => random_int(1,10),
-            'dexterity' => random_int(1,10),
-            'defend' => random_int(1,10),
-            'speed' => random_int(1,10),
+            'attack' => random_int(1, 10),
+            'dexterity' => random_int(1, 10),
+            'defend' => random_int(1, 10),
+            'speed' => random_int(1, 10),
+            'price' => random_int(900, 7200),
+
         ];
     }
 }

@@ -20,7 +20,7 @@ class UserService
                 $user->favoriteLegends()->sync($legendIds);
             }
             if (isset($data['avatar'])){
-                $data['avatar'] = Storage::disk('public')->put('/post_images', $data['avatar']);
+                $data['avatar'] = Storage::disk('public')->put('/users', $data['avatar']);
             }
             $user->update($data);
             DB::commit();

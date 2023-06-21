@@ -16,7 +16,8 @@ class CreateReportsTable extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id', 'report_user_fk')->on('users')->references('id');
+            $table->foreign('user_id', 'report_user_fk')->on('users')->references('id')
+                ->onDelete('cascade');;
             $table->index('user_id', 'report_user_idx');
 
 

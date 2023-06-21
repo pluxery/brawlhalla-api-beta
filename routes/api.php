@@ -34,7 +34,11 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
 Route::controller(UserController::class)->group(function () {
     Route::get('/users', 'index');
     Route::get('/users/{user}', 'show');
-    Route::patch('/users/{user}', 'update');
+    Route::delete('/users/{user}', 'destroy');
+    Route::get('/users/{id}/restore', 'restore');
+    Route::get('/users/{user}', 'show');
+    Route::post('/users/{user}', 'update');//instead patch because form-data request use only post method
+
 });
 
 Route::get('/users/{user}/subscriptions', GetSubscriptions::class);
@@ -49,7 +53,7 @@ Route::controller(PostController::class)->group(function () {
     Route::get('/posts', 'index');
     Route::get('/posts/{post}', 'show');
     Route::post('/posts', 'store');
-    Route::patch('/posts/{post}', 'update');
+    Route::post('/posts/{post}/edit', 'update');
     Route::delete('/posts/{post}', 'destroy');
 
 });

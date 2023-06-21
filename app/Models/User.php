@@ -12,6 +12,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
@@ -20,37 +21,14 @@ use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TEST extends JsonResource
-{
-    /**
-     * Transform the resource into an array.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
-     */
-    public function toArray($request)
-    {
-        return [
-            'id' => $this->id,
-            'title' => $this->title,
-            // 'description' => $this->description,
-            // //'author' => new UserResource($this->user_id),
-            // 'content' => $this->content,
-            // 'likes' => $this->likes,
-            // //'category' => new CategoryResource($this->category_id),
-            // //'tags' => TagResource::collection($this->tags),
-            // 'created_at' => date(' D M, Y', strtotime($this->created_at)),
-            // 'updated_at' => date(' D M, Y', strtotime($this->updated_at)),
-            // //'comments' => CommentResource::collection($this->comments)
-        ];
-    }
-}
+
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, HasFactory, Notifiable, CanResetPassword;
+    use HasApiTokens, HasFactory, Notifiable, CanResetPassword, SoftDeletes;
 
     protected $guarded = false;
+    protected $dates = ['deleted_at'];
 
     public function setPasswordAttribute($password)
     {

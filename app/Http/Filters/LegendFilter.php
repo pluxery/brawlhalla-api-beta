@@ -31,6 +31,7 @@ class LegendFilter extends AbstractFilter
 
     function weaponsAll(Builder $queryBuilder, array $values): Builder
     {
+    
         return $queryBuilder->whereIn("first_weapon_id", $values)
             ->whereIn("second_weapon_id", $values);
 

@@ -24,12 +24,12 @@ class PostCollectionResource extends JsonResource
                 'id' => $this->author->id,
                 'name' => $this->author->name
             ],
-            //'content' => $this->content,
+            'content' => $this->content,
             'likes' => $this->likes->count(),
             'category' => new CategoryResource($this->category),
             'tags' => TagResource::collection($this->tags),
-            'created_at' => date(' D M, Y', strtotime($this->created_at)),
-            'updated_at' => date(' D M, Y', strtotime($this->updated_at)),
+            'created_at' => date("d.m.y", strtotime($this->created_at)),
+            'updated_at' => date("d.m.y", strtotime($this->updated_at)),
             'comments' => $this->comments->count()
         ];
     }

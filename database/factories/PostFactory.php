@@ -14,10 +14,10 @@ class PostFactory extends Factory
      * @return array
      */
     public function definition()
-    {
+    {   $index = random_int(0,7);
         return [
             'title' => $this->faker->sentence,
-            'image' => 'post_images/default_img.png',
+            "image" => "post_images/post_{$index}.jpg",
             'description'=>$this->faker->sentence,
             'content' => $this->faker->text,
             'category_id' => Category::get()->random()->id,
