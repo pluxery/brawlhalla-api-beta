@@ -11,7 +11,8 @@ class UpdateRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize(): bool
+    {
         return true;
     }
 

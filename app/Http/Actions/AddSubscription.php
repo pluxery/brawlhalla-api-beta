@@ -10,11 +10,11 @@ class AddSubscription extends Controller
 {
     function __invoke(User $subscription)
     {
-        $user = auth()->user();
         Subscription::create([
-            'user_id' => $user->id,
+            'user_id' => auth()->user()->id,
             'subscription_id' => $subscription->id
         ]);
-        return $user->subscriptions;
+        return auth()->user()->subscriptions;
     }
+
 }
