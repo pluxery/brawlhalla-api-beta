@@ -9,21 +9,6 @@ use Illuminate\Support\Facades\Storage;
 
 class UserService
 {
-
-
-    function tryRegister($data): bool//for only unit test RegisterTest
-    {
-        $data['avatar'] = 'users/default_avatar_bodwar.png';
-        $user = User::create($data);
-        $credentials = (['email' => $data['email'], 'password' => $data['password']]);
-        if (!auth()->attempt($credentials)) {
-
-            return false;
-        }
-
-        return true;
-    }
-
     function update($data, User $user)
     {
         try {
