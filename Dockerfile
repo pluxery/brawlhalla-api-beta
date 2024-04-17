@@ -1,8 +1,8 @@
-FROM php:7.4-apache
+FROM php:8.2-fpm
 
 # Устанавливаем Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
+RUN docker-php-ext-install pdo_mysql
 # Устанавливаем необходимые инструменты
 RUN apt-get update && apt-get install -y \
     git \
@@ -13,11 +13,12 @@ WORKDIR /app
 
 COPY . /app
 
-RUN composer install
+RUN composer install --ignore-platform-reqs
 
 # В случае необходимости можно выполнять миграции и сиды
-RUN php artisan migrate
-RUN php artisan db:seed
+
+
+#RUN php artisan db:seed
 
 # Открываем порт 80 для веб-сервера
 EXPOSE 8000

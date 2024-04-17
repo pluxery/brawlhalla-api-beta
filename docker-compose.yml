@@ -1,29 +1,45 @@
 version: '3.7'
 
 services:
-  #    brawlhalla_web:
-  #        image: php:7.4-apache
-  #        container_name: brawlhalla_web
-  #        build:
-  #            context: .
-  #            dockerfile: Dockerfile
-  #        env_file:
-  #            - .env
-  #        ports:
-  #            - "8082:8000"
-  
-  brawlhalla_db:
-    image: mariadb:10.5
-    container_name: brawlhalla_db
-    restart: unless-stopped
-    ports:
-      - 3303:3306
-    environment:
-      MYSQL_DATABASE: brawlhalla
-      MYSQL_ROOT_PASSWORD: secret
-      TZ: Asia/Vladivostok
-    volumes:
-      - ./dbdata:/var/lib/mysql
+    php:
+        image: php:8.2-fpm
+        volumes:
+            - .:/var/www/html
+        networks:
+            - laravel
+
+    brawlhalla_db:
+        image: mariadb:10.5
+        container_name: brawlhalla_db
+        restart: unless-stopped
+        ports:
+            - "3303:3306"
+        environment:
+            MYSQL_DATABASE: brawlhalla
+            MYSQL_ROOT_PASSWORD: secret
+            TZ: Asia/Vladivostok
+        volumes:
+            - ./dbdata:/var/lib/mysql
+        networks:
+            - laravel
+
+    webserver:
+        image: nginx:latest
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "8000:8000"
+        volumes:
+            - ./app:/var/www/html
+            - ./nginx-config:/etc/nginx/conf.d
+        depends_on:
+            - php
+        networks:
+            - laravel
+
+networks:
+    laravel:
 
 volumes:
-  mysql_data:
+    mysql_data:
