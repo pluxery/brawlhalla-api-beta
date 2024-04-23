@@ -13,7 +13,7 @@ class PostLikeTest extends Unit
 
     public function testPostLike()
     {
-        $user = User::find(1);
+        $user = UserArranger::create();
         auth()->setUser($user);
         $post = Post::find(1);
 
@@ -27,7 +27,7 @@ class PostLikeTest extends Unit
 
     public function testPostUnlike()
     {
-        $user = User::find(1);
+        $user = UserArranger::create();
         auth()->setUser($user);
         $post = Post::find(1);
 

@@ -17,7 +17,7 @@ class SubbscriberTest extends Unit
 
         $user2 = UserArranger::create();
 
-        $sut = new  AddSubscription ($user2);
+        $sut = new AddSubscription($user2);
         $result = Subscription::query()->where(['user_id' => $user->id, 'subscription_id' => $user2->id])->firstOr(
             function () {
                 return null;
@@ -29,8 +29,6 @@ class SubbscriberTest extends Unit
 
         $user->delete();
         $user2->delete();
-
-
     }
 
     public function testAddDouble()

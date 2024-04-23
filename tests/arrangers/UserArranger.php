@@ -10,8 +10,8 @@ class UserArranger
     static function create()
     {
         $data = [
-            'id' => 1,
             'username' => 'test',
+            'email' => 'test@test.com',
         ];
         return $user = User::create($data);
     }
