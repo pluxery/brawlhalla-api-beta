@@ -9,19 +9,24 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "codeception/codeception": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
-        "fzaninotto/faker": "^1.9.1",
+        "fzaninotto/faker": "*",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/fortify": "^1.17",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
-        "tymon/jwt-auth": "^1.0",
-        "ext-pdo": "*"
+        "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-latest",
+
+        "codeception/module-asserts": "^2.0",
+        "codeception/module-laravel": "^2.3",
+        "codeception/module-phpbrowser": "^2.0",
+        "codeception/module-rest": "^2.0",
+        "codeception/module-webdriver": "^2.0",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",

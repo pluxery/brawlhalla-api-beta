@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Stat;
 use App\Models\Weapon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Storage;

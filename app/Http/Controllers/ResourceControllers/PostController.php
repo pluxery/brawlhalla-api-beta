@@ -19,7 +19,6 @@ class PostController extends Controller
 {
     public $service;
 
-
     function __construct(PostService $service) {
         $this->service = $service;
         $this->authorizeResource(Post::class, 'post');
